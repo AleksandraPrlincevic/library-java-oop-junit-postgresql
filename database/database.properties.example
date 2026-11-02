@@ -1,0 +1,8 @@
+# Replace with your database server address, port number, and database name
+url=jdbc:postgresql://localhost:5432/biblioteka
+
+# Replace with your PostgreSQL username
+username=your_username
+
+# Replace with your PostgreSQL password
+password=your_password
