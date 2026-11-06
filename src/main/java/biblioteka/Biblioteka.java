@@ -39,10 +39,13 @@ public class Biblioteka {
     }
 
     public Pozajmica izdajKnjigu(Korisnik korisnik, Knjiga knjiga) {
-        if(!listaKnjiga.contains(knjiga) || !listaKorisnika.contains(korisnik)){
-            throw new IllegalStateException("Ne moze se napraviti pozajmica. Knjiga ne postoji u biblioteci ili korisnik nije uclanjen");
+        if (!listaKnjiga.contains(knjiga)) {
+            throw new IllegalStateException("Ne moze se napraviti pozajmica. Knjiga ne postoji u biblioteci.");
         }
-        else if (!knjiga.isDostupna()) {
+        if (!listaKorisnika.contains(korisnik)) {
+            throw new IllegalStateException("Ne moze se napraviti pozajmica. Korisnik nije uclanjen.");
+        }
+        if (!knjiga.isDostupna()) {
             throw new IllegalStateException("Žao nam je, ova knjiga je vec izdata.");
 
         }

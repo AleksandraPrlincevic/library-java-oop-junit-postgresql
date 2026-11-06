@@ -59,6 +59,7 @@ class BibliotekaTest {
         biblioteka.dodajKorisnika(korisnik);
         biblioteka.izdajKnjigu(korisnik, knjiga1);
 
+        assertFalse(knjiga1.isDostupna());
         assertEquals(1, biblioteka.getListaPozajmica().size());
         assertEquals(korisnik, biblioteka.getListaPozajmica().get(0).getKorisnik());
         assertEquals(knjiga1, biblioteka.getListaPozajmica().get(0).getKnjiga());
@@ -68,9 +69,10 @@ class BibliotekaTest {
     public void izdajKnjiguKojaNePostojiUBiblioteciNeMozeDaJeIzda() {
         Knjiga knjiga1 = TestDataGenerator.napraviRandomKnjigu();
         Korisnik korisnik = TestDataGenerator.napraviRandomKorisnika();
-        biblioteka.dodajKorisnika();
-        assertThrows(IllegalStateException.class, ()-> { biblioteka.izdajKnjigu(korisnik, knjiga1);
+        biblioteka.dodajKorisnika(korisnik);
+        IllegalStateException e = assertThrows(IllegalStateException.class, ()-> { biblioteka.izdajKnjigu(korisnik, knjiga1);
         });
+        assertEquals("Ne moze se napraviti pozajmica. Knjiga ne postoji u biblioteci.", e.getMessage());
 
         assertTrue(biblioteka.getListaPozajmica().isEmpty());
     }
@@ -80,8 +82,11 @@ class BibliotekaTest {
         Knjiga knjiga1 = TestDataGenerator.napraviRandomKnjigu();
         Korisnik korisnik = TestDataGenerator.napraviRandomKorisnika();
         biblioteka.dodajKnjigu(knjiga1);
-        assertThrows(IllegalStateException.class, ()-> {biblioteka.izdajKnjigu(korisnik, knjiga1);
+        IllegalStateException e = assertThrows(IllegalStateException.class, ()-> {biblioteka.izdajKnjigu(korisnik, knjiga1);
         });
+        assertEquals("Ne moze se napraviti pozajmica. Korisnik nije uclanjen.", e.getMessage());
+        assertTrue(biblioteka.getListaPozajmica().isEmpty());
+        assertTrue(knjiga1.isDostupna());
     }
 
     @Test
@@ -104,6 +109,7 @@ class BibliotekaTest {
         biblioteka.dodajKnjigu(knjiga);
         biblioteka.dodajKorisnika(korisnik);
         Pozajmica p1 = biblioteka.izdajKnjigu(korisnik, knjiga);
+        assertFalse(knjiga.isDostupna());
         biblioteka.vratiKnjigu(korisnik,knjiga);
          assertTrue(knjiga.isDostupna());
          assertTrue(biblioteka.getArhivaPozajmica().contains(p1));
@@ -131,6 +137,7 @@ class BibliotekaTest {
         biblioteka.dodajKorisnika(k1, k2, k3);
         ArrayList<Korisnik> sortiranaLista = biblioteka.getKorisniciSortiraniPoPrezimenu();
         assertEquals(k3.getPrezimeIime(), sortiranaLista.get(0).getPrezimeIime());
+        assertEquals(k2.getPrezimeIime(), sortiranaLista.get(2).getPrezimeIime());
         assertEquals(k1.getPrezimeIime(), sortiranaLista.get(1).getPrezimeIime());
 }
 
