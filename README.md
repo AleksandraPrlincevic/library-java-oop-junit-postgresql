@@ -1,30 +1,28 @@
 </> Markdown
 # Library Practice project
-## Description:
+## Description
 The Library Practice Project started as a Java OOP practice project focused on building a simple library system.
 
 After learning Selenium test automation and implementing it in the SauceDemo automation project, I returned to 
-this project to improve its structure, add new functionality, and implement my first JUnit tests while the 
-application was still using in-memory data storage.
+this project to improve its structure, add new functionality, and write my first JUnit 5 tests while the 
+application still used in-memory data storage. Writing and running the tests exposed missing methods and logic gaps, 
+so I fixed both the code and the tests.
 
-The goal of this phase was to practice unit testing, refactor existing logic based on test results, 
-and gain a better understanding of test-driven development principles.
-
-In the final phase, I connected the application to a PostgreSQL database using JDBC. I implemented repository 
+In the next phase, I connected the application to a PostgreSQL database using JDBC. I implemented repository 
 classes for database operations and added integration tests covering database connectivity, data retrieval, 
-and business logic. During development, I also refactored the Java classes based on issues identified through testing.
+and business logic. 
 
-## Tech Stack:
+## Tech Stack
+ 
+- Java (OpenJDK 26)
+- IntelliJ IDEA 2026.1
+- JUnit 5
+- Maven
+- JDBC
+- PostgreSQL
+- Git & GitHub
 
-    - Java (OpenJDK 26)
-    - IntelliJ IDEA 2026.1
-    - JUnit 5
-    - Maven
-    - JDBC
-    - PostgreSQL
-    - Git & GitHub
-
-## Features
+## Features (in-memory version, covered by unit tests)
 
 - Add books to the library
 - Register users
@@ -33,6 +31,8 @@ and business logic. During development, I also refactored the Java classes based
 - Validate business rules using exceptions
 - Retrieve youngest user
 - Sort users by surname
+
+In the PostgreSQL version the loan status is derived from the return date.
 
 ## Database configuration
 
@@ -53,16 +53,16 @@ database server address, port number, database name, username and password.
 1. Clone the repository
 2. Open the project in IntelliJ IDEA
 3. Load Maven dependencies (IntelliJ will handle this automatically)
-4. Execute database/schema.sql in PostgreSQL to create the required tables and sequences.
-5. Make sure database connection settings in database/database.properties are configured .
-6. Run all tests from IntelliJ IDEA Maven panel or via terminal:
+4. Create an empty PostgreSQL database
+5. Execute database/schema.sql in PostgreSQL to create the required tables and sequences.
+6. Make sure database connection settings in database/database.properties are configured .
 
-```bash
-mvn test
-```
+### Running tests
+In IntelliJ IDEA, click the green arrow next to a test class to run all its
+tests, or next to a single test method to run just that one.
 # Testing
 
-## This project includes:
+## This project includes
 
 - 28 automated tests written with JUnit 5
 - Unit tests for core business logic
