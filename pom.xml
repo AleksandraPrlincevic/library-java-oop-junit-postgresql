@@ -6,7 +6,7 @@
 <modelVersion>4.0.0</modelVersion>
 
 <groupId>com.library</groupId>
-<artifactId>libraryPractiseProject</artifactId>
+<artifactId>library-java-oop-junit-postgresql</artifactId>
 <version>1.0-SNAPSHOT</version>
 
 <properties>
